@@ -2,7 +2,7 @@ from transformers import AutoModel, AutoConfig
 import pytorch_lightning as pl
 import os
 import torch
-from torch import cuda, nn
+from torch import nn
 
 
 class FAQNet(nn.Module):
@@ -13,7 +13,7 @@ class FAQNet(nn.Module):
         self.bert: AutoModel = AutoModel.from_pretrained(
             self.config.model.pretrained_model,
             return_dict=True,
-            output_hidden_states=True).to(cuda)
+            output_hidden_states=True).cuda()
         self.bert_config = AutoConfig.from_pretrained(
             self.config.model.pretrained_model)
         for param in self.bert.parameters():
