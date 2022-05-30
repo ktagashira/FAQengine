@@ -27,7 +27,7 @@ class FAQDataset(Dataset):
         question_encoding = self.tokenizer(
             question,
             add_special_tokens=True,
-            max_length=self.max_token_len,
+            max_length=self.training.max_token_len,
             padding="max_length",
             truncation=True,
             return_attention_mask=True,
@@ -50,8 +50,6 @@ class FAQDataModule(pl.LightningDataModule):
 
         self.train_df, self.test_df = self.load_dataset()
 
-        self.batch_size = config.training.batch_size
-        self.max_token_len = config.trainig.max_token_len
         self.tokenizer = BertJapaneseTokenizer.from_pretrained(
             self.config.model.pretrained_model)
 
