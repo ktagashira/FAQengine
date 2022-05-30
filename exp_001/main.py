@@ -19,8 +19,8 @@ def main(cfg: DictConfig):
 
     output_path = os.path.join(os.getcwd(), cfg.path.checkpoint_path)
     target_dir = os.path.join(
-        cfg.path.project_path, 'data', cfg.path.client_name, 'test')
-    print(target_dir)
+        cfg.path.project_path, 'data', cfg.path.client_name, 'target')
+
     target_csv = os.listdir(target_dir)[0]
 
     targets = pd.read_csv(target_csv)[
