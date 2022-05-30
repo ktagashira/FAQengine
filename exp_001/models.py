@@ -5,7 +5,7 @@ import torch
 from torch import cuda, nn
 
 
-class FAQNet():
+class FAQNet(nn.Module):
     def __init__(self, config, num_class):
         super.__init__()
         self.config = config
