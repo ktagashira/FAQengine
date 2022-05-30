@@ -1,3 +1,4 @@
+from responses import target
 from .models import QAModel
 from .lightning_datamodule import FAQDataModule
 
@@ -18,7 +19,10 @@ def main(cfg: DictConfig):
     output_path = os.path.join(os.getcwd(), cfg.path.checkpoint_path)
 
     # set target list
-    targets = pd.read_csv(cfg.path.target_data_file)[
+    target_dir = os.path.join(cfg.path.client_path, 'test')
+    target_csv = os.listdir(target_dir)[0]
+
+    targets = pd.read_csv(target_csv)[
         cfg.data.answer_column].tolist()
     data_module = FAQDataModule(cfg, targets)
     model = QAModel(cfg, targets)

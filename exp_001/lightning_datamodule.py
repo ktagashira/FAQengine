@@ -49,8 +49,7 @@ class FAQDataModule(pl.LightningDataModule):
         self.config = config
         self.targets = targets
 
-        self.train_df = pd.read_csv(config.path.data_file)
-        self.test_df = pd.read_csv(config.path.test_data_file)
+        self.train_df, self.test_df = self.load_dataset()
 
         self.batch_size = config.training.batch_size
         self.max_token_len = config.trainig.max_token_len
@@ -62,7 +61,7 @@ class FAQDataModule(pl.LightningDataModule):
             self.all_dataset = FAQDataset(
                 self.train_df, self.targets, self.tokenizer, self.max_token_len)
             train_size = int(len(self.all_dataset) *
-                             self.config.training.data_split_ratio)
+                             self.config.train_valid_split)
             valid_size = len(self.all_dataset) - train_size
             self.train_dataset, self.valid_dataset = random_split(
                 self.all_dataset, [train_size, valid_size])
@@ -79,3 +78,19 @@ class FAQDataModule(pl.LightningDataModule):
 
     def test_dataloader(self):
         return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=os.cpu_count())
+
+    def load_dataset(self):
+        train_data_dir = os.path.join(self.config.client_path, 'train')
+        train_data_list = os.listdir(train_data_dir)
+        df_list = []
+        for data in train_data_list:
+            if data.endswith('.csv'):
+                df = pd.read_csv(data)
+                df_list.append(df)
+        all_df = pd.concat(df_list)
+        all_df = all_df.sample(frac=1)
+
+        train_df = all_df.iloc[:-self.config.data.test_data_size, :]
+        test_df = all_df.iloc[-self.config.data.test_data_size:, :]
+
+        return train_df, test_df
