@@ -1,0 +1,24 @@
+hydra:
+  output_subdir: hydra_params
+wandb:
+  project: FAQEngine
+  exp_name: exp_001
+
+path:
+  train_data_file:
+  test_data_file:
+  target_data_file:
+  checkpoint_path: checkpoint
+data:
+  question_column: Question
+  answer_column: Answer
+model:
+  pretrained_model: cl-tohoku/bert-base-japanese-whole-word-masking
+training:
+  num_epochs: 10
+  batch_size: 64
+  max_token_len: 512
+  data_split_ratio: 0.8
+  dropout_rate: 0.1
+  learning_rate: 0.00005
+  mrr_at_k: 5
