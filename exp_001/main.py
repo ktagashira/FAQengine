@@ -14,8 +14,8 @@ import wandb
 @hydra.main(config_path='.', config_name='config', )
 def main(cfg: DictConfig):
     sys.path.append(os.path.join('.', cfg.path.src_dir, cfg.wandb.exp_name))
-    from .models import QAModel
-    from .lightning_datamodule import FAQDataModule
+    from models import QAModel
+    from lightning_datamodule import FAQDataModule
 
     output_path = os.path.join(os.getcwd(), cfg.path.checkpoint_path)
     target_dir = os.path.join(
