@@ -6,7 +6,7 @@ wandb:
 path:
   project_path: /content/drive/MyDrive/ML_proj/FAQEngine
   src_dir: colab_exp_src
-  client_name: ANA
+  client_name: phama
   checkpoint_path: checkpoint
 data:
   question_column: Question
