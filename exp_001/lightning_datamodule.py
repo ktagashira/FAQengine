@@ -27,7 +27,7 @@ class FAQDataset(Dataset):
         question_encoding = self.tokenizer(
             question,
             add_special_tokens=True,
-            max_length=self.training.max_token_len,
+            max_length=self.config.training.max_token_len,
             padding="max_length",
             truncation=True,
             return_attention_mask=True,
@@ -68,13 +68,13 @@ class FAQDataModule(pl.LightningDataModule):
                 self.config, self.test_df, self.targets, self.tokenizer, )
 
     def train_dataloader(self):
-        return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=os.cpu_count())
+        return DataLoader(self.train_dataset, batch_size=self.config.training.batch_size, shuffle=True, num_workers=os.cpu_count())
 
     def val_dataloader(self):
-        return DataLoader(self.valid_dataset, batch_size=self.batch_size, num_workers=os.cpu_count())
+        return DataLoader(self.valid_dataset, batch_size=self.config.training.batch_size, num_workers=os.cpu_count())
 
     def test_dataloader(self):
-        return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=os.cpu_count())
+        return DataLoader(self.test_dataset, batch_size=self.config.training.batch_size, num_workers=os.cpu_count())
 
     def load_dataset(self):
         train_data_dir = os.path.join(
