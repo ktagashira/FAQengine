@@ -13,7 +13,7 @@ import wandb
 
 @hydra.main(config_path='.', config_name='config', )
 def main(cfg: DictConfig):
-    sys.path.append(os.path.join(cfg.path.src_dir, cfg.wandb.exp_name))
+    sys.path.append(os.path.join('.', cfg.path.src_dir, cfg.wandb.exp_name))
     from .models import QAModel
     from .lightning_datamodule import FAQDataModule
 
