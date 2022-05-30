@@ -6,4 +6,5 @@ fugashi
 ipadic
 pandas
 numpy
+hydra-core
 wandb
