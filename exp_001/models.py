@@ -7,7 +7,7 @@ from torch import cuda, nn
 
 class FAQNet(nn.Module):
     def __init__(self, config, num_class):
-        super.__init__()
+        super().__init__()
         self.config = config
         self.num_class = num_class
         self.bert: AutoModel = AutoModel.from_pretrained(
