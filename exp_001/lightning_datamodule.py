@@ -58,7 +58,7 @@ class FAQDataModule(pl.LightningDataModule):
             self.all_dataset = FAQDataset(
                 self.config, self.train_df, self.targets, self.tokenizer, )
             train_size = int(len(self.all_dataset) *
-                             self.config.train_valid_split)
+                             self.config.data.train_valid_split)
             valid_size = len(self.all_dataset) - train_size
             self.train_dataset, self.valid_dataset = random_split(
                 self.all_dataset, [train_size, valid_size])
