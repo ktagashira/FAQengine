@@ -4,7 +4,9 @@ wandb:
   project: FAQEngine
   exp_name: exp_001
 path:
-  client_path: /content/drive/MyDrive/ML_proj/FAQEngine/data/ANA
+  project_path: /content/drive/MyDrive/ML_proj/FAQEngine
+  src_dir: colab_exp_src
+  client_name: ANA
   checkpoint_path: checkpoint
 data:
   question_column: Question

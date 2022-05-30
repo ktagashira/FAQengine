@@ -79,7 +79,8 @@ class FAQDataModule(pl.LightningDataModule):
         return DataLoader(self.test_dataset, batch_size=self.batch_size, num_workers=os.cpu_count())
 
     def load_dataset(self):
-        train_data_dir = os.path.join(self.config.client_path, 'train')
+        train_data_dir = os.path.join(
+            self.config.path.project_path, 'data', self.config.path.client_name, 'train')
         train_data_list = os.listdir(train_data_dir)
         df_list = []
         for data in train_data_list:

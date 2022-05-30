@@ -1,13 +1,10 @@
-from responses import target
-from .models import QAModel
-from .lightning_datamodule import FAQDataModule
-
 from omegaconf import DictConfig
 import hydra
 import pandas as pd
-import numpy as np
+
 from pytorch_lightning.callbacks import ModelCheckpoint
 import os
+import sys
 import pytorch_lightning as pl
 from pytorch_lightning import loggers as pl_loggers
 
@@ -16,10 +13,13 @@ import wandb
 
 @hydra.main(config_path='.', config_name='config', )
 def main(cfg: DictConfig):
-    output_path = os.path.join(os.getcwd(), cfg.path.checkpoint_path)
+    sys.path.append(os.path.join(cfg.path.src_dir, cfg.wandb.exp_name))
+    from .models import QAModel
+    from .lightning_datamodule import FAQDataModule
 
-    # set target list
-    target_dir = os.path.join(cfg.path.client_path, 'test')
+    output_path = os.path.join(os.getcwd(), cfg.path.checkpoint_path)
+    target_dir = os.path.join(
+        cfg.path.project_path, 'data', cfg.path.client_name, 'test')
     target_csv = os.listdir(target_dir)[0]
 
     targets = pd.read_csv(target_csv)[
