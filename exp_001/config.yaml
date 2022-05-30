@@ -11,8 +11,8 @@ path:
 data:
   question_column: Question
   answer_column: Answer
-  train_valid_split: 0.8
-  test_data_size: 700
+  train_valid_split: 0.9
+  test_data_size: 500
 model:
   pretrained_model: cl-tohoku/bert-base-japanese-whole-word-masking
 training:
