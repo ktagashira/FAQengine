@@ -23,7 +23,7 @@ def main(cfg: DictConfig):
 
     target_csv = os.listdir(target_dir)[0]
 
-    targets = pd.read_csv(target_csv)[
+    targets = pd.read_csv(os.path.join(target_dir, target_csv))[
         cfg.data.answer_column].tolist()
     data_module = FAQDataModule(cfg, targets)
     model = QAModel(cfg, targets)

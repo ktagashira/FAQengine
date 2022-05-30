@@ -85,7 +85,7 @@ class FAQDataModule(pl.LightningDataModule):
         df_list = []
         for data in train_data_list:
             if data.endswith('.csv'):
-                df = pd.read_csv(data)
+                df = pd.read_csv(os.path.join(train_data_dir, data))
                 df_list.append(df)
         all_df = pd.concat(df_list)
         all_df = all_df.sample(frac=1)
