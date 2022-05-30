@@ -2,7 +2,7 @@ hydra:
   output_subdir: hydra_params
 wandb:
   project: FAQEngine
-  exp_name: exp_001
+  exp_name: exp_002
 path:
   project_path: /content/drive/MyDrive/ML_proj/FAQEngine
   src_dir: colab_exp_src
