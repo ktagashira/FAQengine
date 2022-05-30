@@ -3,7 +3,6 @@ hydra:
 wandb:
   project: FAQEngine
   exp_name: exp_001
-
 path:
   client_path: /content/drive/MyDrive/ML_proj/FAQEngine/data/ANA
   checkpoint_path: checkpoint

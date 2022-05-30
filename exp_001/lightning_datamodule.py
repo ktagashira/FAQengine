@@ -8,12 +8,11 @@ import pandas as pd
 
 
 class FAQDataset(Dataset):
-    def __init__(self, config, data, queries, tokenizer, max_token_len):
+    def __init__(self, config, data, targets, tokenizer):
         self.config = config
         self.data = data
         self.tokenizer = tokenizer
-        self.max_token_len = max_token_len
-        self.classes = queries
+        self.classes = targets
 
     def __len__(self):
         return len(self.data)
@@ -59,7 +58,7 @@ class FAQDataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         if stage == 'fit' or stage is None:
             self.all_dataset = FAQDataset(
-                self.train_df, self.targets, self.tokenizer, self.max_token_len)
+                self.config, self.train_df, self.targets, self.tokenizer, )
             train_size = int(len(self.all_dataset) *
                              self.config.train_valid_split)
             valid_size = len(self.all_dataset) - train_size
@@ -68,7 +67,7 @@ class FAQDataModule(pl.LightningDataModule):
 
         if stage == 'test' or stage is None:
             self.test_dataset = FAQDataset(
-                self.test_df, self.targets, self.tokenizer, self.max_token_len)
+                self.config, self.test_df, self.targets, self.tokenizer, )
 
     def train_dataloader(self):
         return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=os.cpu_count())
