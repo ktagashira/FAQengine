@@ -40,8 +40,7 @@ def main(cfg: DictConfig):
         name=cfg.wandb.exp_name, project=cfg.wandb.project)
     wb_logger.log_hyperparams(cfg)
 
-    wandb.config["checkpoint_path"] = output_path
-    wandb.config.update()
+    wandb.config.update({"checkpoint_path": output_path})
 
     trainer = pl.Trainer(max_epochs=cfg.training.num_epochs,
                          gpus=1,
