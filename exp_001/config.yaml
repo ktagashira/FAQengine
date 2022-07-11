@@ -10,7 +10,7 @@ path:
   checkpoint_path: checkpoint
 data:
   question_column: Question
-  answer_column: Answer
+  answer_column: Index
   train_valid_split: 0.9
   test_data_size: 500
 model:
